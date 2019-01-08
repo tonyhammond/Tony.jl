@@ -12,6 +12,8 @@ hello() = print("Hello Tony!")
 const CITIES_FILE = joinpath(@__DIR__, "../csv/cities.csv")
 const PROPERTIES_FILE = joinpath(@__DIR__, "../csv/properties.csv")
 
+include("places.jl")
+
 "Utility call to read cities.csv data."
 cities() = CSV.read(CITIES_FILE)
 
@@ -22,8 +24,6 @@ properties() = CSV.read(PROPERTIES_FILE)
 function plotcities()
     # read cities into a dataframe
     df = cities()
-
-    include("src/places.jl")
 
     # scatter plots
     df1 = filter(row -> row[:population] > 900_000, df)
@@ -81,9 +81,6 @@ function plotcities()
         )
     plot(p1,p2,layout=2,legend=false)
     savefig("images/plotcities-layout.png")
-
-    # plot(p0,p1,layout = (1,2),legend=false)
-    # savefig("images/plotcities-test.png")
 end
 
 end
