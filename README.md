@@ -66,7 +66,7 @@ function plotcities()
     df2 = filter(row -> row[:population] <= 900_000, df)
     df3 = filter(row -> haskey(places, row[:name]) , df)
 
-    # scatter plot of lat/long - for df2 cities (below 1m pop.)
+    # scatter plot of lat/long - for df2 cities (below 0.9m pop.)
     p0 = scatter(df2[:longitude], df2[:latitude],
         title = "US Cities",
         xlabel = "Longitude",
@@ -83,7 +83,7 @@ function plotcities()
         markercolor = :yellow,
         markersize = 10
         )
-    # scatter plot of lat/long - for df1 cities (above 1m pop.)
+    # scatter plot of lat/long - for df1 cities (above 0.9m pop.)
     scatter!(df1[:longitude], df1[:latitude],
         legend = false,
         markershape = :rect,
@@ -120,7 +120,7 @@ function plotcities()
 end
 ```
 
-This gives the following plots: a) a scatter plot of US city lat/long positions, and b) line plots for US city population distribution
+This gives the following plots: a) a scatter plot of US city lat/long positions (orange markers show major cities with pop. of over 0.9m, yellow markers are places I have visited), and b) line plots for US city population distribution
 which is comprised of two subplots using the `layout` composition:
 
 ### a) Lat/Long
