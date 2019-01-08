@@ -24,8 +24,8 @@ function plotcities()
     df = cities()
 
     # scatter plots
-    df1 = filter(row -> row[:population] > 1_000_000, df)
-    df2 = filter(row -> row[:population] <= 1_000_000, df)
+    df1 = filter(row -> row[:population] > 900_000, df)
+    df2 = filter(row -> row[:population] <= 900_000, df)
     # scatter plot of lat/long - for df2 cities (below 1m pop.)
     p0 = scatter(df2[:longitude], df2[:latitude],
         title = "US Cities",
@@ -71,8 +71,8 @@ function plotcities()
     plot(p1,p2,layout=2,legend=false)
     savefig("images/plotcities-layout.png")
 
-    plot(p0,p1,layout = (1,2),legend=false)
-    savefig("images/plotcities-test.png")
+    # plot(p0,p1,layout = (1,2),legend=false)
+    # savefig("images/plotcities-test.png")
 end
 
 end
