@@ -64,21 +64,30 @@ function plotcities()
     # scatter plots
     df1 = filter(row -> row[:population] > 900_000, df)
     df2 = filter(row -> row[:population] <= 900_000, df)
+    df3 = filter(row -> haskey(places, row[:name]) , df)
+
     # scatter plot of lat/long - for df2 cities (below 1m pop.)
-    scatter(df2[:longitude], df2[:latitude],
+    p0 = scatter(df2[:longitude], df2[:latitude],
         title = "US Cities",
         xlabel = "Longitude",
         ylabel = "Latitude",
         legend = false,
         markershape = :circle,
-        markercolor = :auto
+        markercolor = :auto,
         # markersize = 4
+        )
+    # scatter plot of lat/long - for df3 cities (visited)
+    scatter!(df3[:longitude], df3[:latitude],
+        legend = false,
+        markershape = :circle,
+        markercolor = :yellow,
+        markersize = 10
         )
     # scatter plot of lat/long - for df1 cities (above 1m pop.)
     scatter!(df1[:longitude], df1[:latitude],
         legend = false,
         markershape = :rect,
-        markercolor = :orange
+        markercolor = :orange,
         # markersize = 4
         )
     savefig("images/plotcities-latlong.png")
